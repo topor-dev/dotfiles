@@ -1,0 +1,6 @@
+download dictionaries from:
+https://github.com/titoBouzout/Dictionaries
+
+and paste them in ./Dictionaries/
+	Russian-English Bilingual.aff
+	Russian-English Bilingual.dic

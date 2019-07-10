@@ -1,0 +1,30 @@
+{
+	"added_words":
+	[
+	],
+	"auto_complete": true,
+	"auto_complete_function_params": "required",
+	"auto_complete_triggers":
+	[
+		{
+			"characters": ".",
+			"selector": "source.python"
+		}
+	],
+	"color_scheme": "Monokai.sublime-color-scheme",
+	"dictionary": "Packages/Dictionaries/Russian-English Bilingual.dic",
+	"font_size": 15,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"rullers":
+	[
+		80,
+		100
+	],
+	"spell_check": true,
+	"theme": "Default.sublime-theme",
+	"update_check": false,
+	"word_wrap": true
+}

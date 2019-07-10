@@ -1,0 +1,8 @@
+[
+	{ "keys": ["ctrl+q"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["ctrl+shift+q"], "command": "toggle_comment", "args": { "block": true } },
+	{ "keys": ["ctrl+d"], "command": "duplicate_line" },
+
+	//{ "keys": ["ctrl+e"], "command": "run_macro_file", "args":{"file":"Packages/User/select_line.sublime-macro"}},
+	{ "keys": ["ctrl+e"], "command": "expand_selection", "args": {"to": "line"} },
+]
