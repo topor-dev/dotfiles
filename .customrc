@@ -1,0 +1,78 @@
+# append after every command
+PROMPT_COMMAND='history -a;history -n'
+
+# ignore commands
+export HISTIGNORE='ls:[bf]g:exit'
+
+# disable catch ^q
+stty -ixon
+
+
+# colors:
+COLOR_OFF='\[\e[0m\]'       # Text Reset
+# Regular Colors
+BLACK='\[\e[0;30m\]'        # Black
+RED='\[\e[0;31m\]'          # Red
+GREEN='\[\e[0;32m\]'        # Green
+YELLOW='\[\e[0;33m\]'       # Yellow
+BLUE='\[\e[0;34m\]'         # Blue
+PURPLE='\[\e[0;35m\]'       # Purple
+CYAN='\[\e[0;36m\]'         # Cyan
+WHITE='\[\e[0;37m\]'        # White
+
+# detect ssh
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then 
+	IS_SSH="True"
+else
+	case $(ps -o comm= -p $PPID) in
+		sshd|*/sshd) IS_SSH="True";
+	esac;
+fi;
+
+PS1_host="${IS_SSH:+on ${GREEN}`hostname`${COLOR_OFF}:
+}"
+title_host="${IS_SSH:+on `hostname`:}"
+
+PS1="${PS1_host}[\u:${GREEN}\w${COLOR_OFF}]\$ "
+unset $IS_SSH
+
+
+function pre_exec(){
+  # set title of terminal to command executing now
+  echo -ne "\e]0;${title_host} ${BASH_COMMAND/history -n/`dirs +0`}\a"
+}
+case "$TERM" in
+  xterm*|rxvt*) trap "pre_exec" DEBUG;;
+esac;
+
+# battery
+bat(){
+	u="upower -i"
+	en="upower -e"
+	for bat in `$en`; do
+		p=`echo ${bat} | grep BAT`
+		if [ -n $p ]; then
+			$u $p | grep -e 'state\|percentage\|time'
+		fi;
+	done;
+	bat1=${en}
+}
+
+
+mkcd(){
+	mkdir -p "$1"
+	cd "$1"
+}
+
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+	. /usr/share/bash-completion/bash_completion
+fi;
+
+# aliases
+alias cc="xclip -sel clipboard -i -f"
+alias pp="xclip -sel clipboard -o"
+
+alias im="vim"
+
+# manage config files using git
+alias config="`which git` --git-dir=$HOME/.dotfiles --work-tree=$HOME"
