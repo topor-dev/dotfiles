@@ -1,0 +1,25 @@
+[user]
+	name = Vadim Tokarev
+	email = 16782067+topor-dev@users.noreply.github.com
+[core]
+	autocrlf = input
+	safecrlf = true
+	editor = vim
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+	serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
+	fshow = show --oneline --name-only --shortstat
+[push]
+	default = simple
+[ui]
+	color = true
+[help]
+	autoCorrect=5
+[rerere]
+	enabled=true
