@@ -1,0 +1,29 @@
+partial
+xkb_symbols "set_prsc_as_menu"{
+	replace key <PRSC> { [ Menu ] };
+};
+
+partial
+xkb_symbols "move_prtscr" {
+	replace key <CAPS> {
+        type= "PC_ALT_LEVEL2",
+        symbols[Group1]= [ Print, Sys_Req ]
+	};
+};
+
+partial
+xkb_symbols "swap_pgupdown_homeend" {
+	replace key <PGUP> { [ Home  ] };
+	replace key <PGDN> { [ End   ] };
+	replace key <HOME> { [ Prior ] };
+	replace key  <END> { [ Next  ] };
+};
+
+partial modifier_keys
+xkb_symbols "alt_caps_switch" {
+    key <CAPS> {
+       type="PC_ALT_LEVEL2",
+       symbols[Group1] = [ ISO_First_Group, ISO_Last_Group ]
+    };
+};
+
