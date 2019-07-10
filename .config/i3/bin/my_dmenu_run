@@ -1,0 +1,12 @@
+#!/bin/sh
+# orig: /usr/bin/dmenu_run
+# this version diff by: set layout to zero, then restore
+setup(){
+	# https://github.com/nonpop/xkblayout-state.git
+	cur_layout=`xkblayout-state print "%c"`
+	xkblayout-state set 0
+}
+teardown(){
+	xkblayout-state set $cur_layout
+}
+( setup && dmenu_path | dmenu "$@" | ${SHELL:-"/bin/sh"} && teardown ) &
