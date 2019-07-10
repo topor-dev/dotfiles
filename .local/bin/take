@@ -1,0 +1,22 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]; then printf "USAGE: $0 line-num [file]\n\n" ; exit; fi;
+
+# take n lines start from m line
+if test -n "$1" ; then
+	case $1 in
+		*+*)
+			start=`echo $1 | sed 's/+/ + /g' | xargs expr`;
+			plus=`echo $1 | sed 's/.*+//;s/$/ + 1/' | xargs expr`;;
+		*) start=$1; plus=1;;
+	esac;
+        if test -n "$2" ; then
+                head -n$start $2 | tail -$plus
+        else
+                if [ ! -t 0 ]; then # if something on stdin
+                        head -n$start | tail -$plus
+                else
+                        printf "there must be something on stdin\n\n"
+                fi
+        fi
+fi
